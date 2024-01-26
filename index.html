@@ -1,5 +1,22 @@
 <!DOCTYPE html>
 <html>
+<style>
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    /* Default Axis is X*/
+    justify-content: center;
+    /* Main Axis */
+    align-items: center;
+    /* Cross Axis */
+  }
+
+  .indicator {
+    width: 50vw;
+  }
+</style>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -23,37 +40,54 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="mywebsite">
+  <meta name="apple-mobile-web-app-title" content="Galakrond">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>mywebsite</title>
+  <title>Galakrond</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "2930094168";
+    const serviceWorkerVersion = "3633515820";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
-<body>
+
+<body style="overflow: hidden" bgcolor="#212332">
+  <div id="loading_indicator" class="container">
+    <img class="indicator" src="./assets/loading.gif" />
+  </div>
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
             appRunner.runApp();
           });
         }
       });
     });
   </script>
+  <script>
+    window.onload = function () {
+      setTimeout(function () {
+        var loadingIndicator = document.getElementById("loading_indicator");
+        if (loadingIndicator) {
+          loadingIndicator.remove();
+        }
+      }, 10000);
+    };
+
+
+  </script>
 </body>
+
 </html>
